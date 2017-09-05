@@ -2,7 +2,6 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<properties resource="db.properties" />
 	<!-- 配置运行环境，可以配置多个，可以开发用mysql,上线用oracle等，只需配置一个mysq和一个oracle的配置 -->
 	<environments default="mysqlEM">
 		<!--配置文件的id，用于environments选择运行环境，这里是mysql的运行环境-->
@@ -11,18 +10,20 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<!-- mysql的驱动 -->
-				<property name="driver" value="${jdbc.mysql.driver}"/>
+				<property name="driver" value="${jdbc.driver}"/>
 				<!--mysql jdbc的uri-->
-				<property name="url" value="${jdbc.mysql.url}"/>
+				<property name="url" value="${jdbc.url}"/>
 				<!-- mysql数据库的用户名-->
-				<property name="username" value="${jdbc.mysql.username}"/>
+				<property name="username" value="${jdbc.username}"/>
 				<!-- mysql数据库的密码-->
-				<property name="password" value="${jdbc.mysql.password}"/>
+				<property name="password" value="${jdbc.password}"/>
 			</dataSource>
 		</environment>
 	</environments>
 	<!-- 注册映射文件 -->
 	<mappers>
-		
+		<#list mappers as mapper>
+		<mapper resource="${mapper}"/>
+		</#list>
 	</mappers>
 </configuration>

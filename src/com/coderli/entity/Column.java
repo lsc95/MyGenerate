@@ -41,4 +41,10 @@ public class Column {
 		this.isKey = isKey;
 	}
 
+	@Override
+	public String toString() {
+		return "Column [name=" + name + ", type=" + type + ", isKey=" + isKey
+				+ "]";
+	}
+
 }
