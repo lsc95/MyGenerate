@@ -16,6 +16,7 @@ public class ParseProperties {
 		info.setName("jdbc.mysql.username");
 		info.setPassword("jdbc.mysql.password");
 		info.setUrl("jdbc.mysql.url");
+		info.setTargetPackage(properties.getProperty("generate.targetPackage"));
 		return info;
 	}
 
