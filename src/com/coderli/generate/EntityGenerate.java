@@ -23,11 +23,12 @@ import freemarker.template.Template;
 @SuppressWarnings("all")
 public class EntityGenerate {
 	public File generateEntity() throws Exception{
+		//获取配置文件信息
 		ConfigInfo info = ParseProperties.parseGenerateProperties("generate.properties");
 		String base = "D:/fileTest";	
 		Map<String, Table> map = DButils.getDataBaseInfo(info);
 		Iterator<Entry<String, Table>> iterator = map.entrySet().iterator();
-		//fm
+		//使用FreeMarker
 		Configuration configuration = new Configuration(Configuration.VERSION_2_3_26);
 		File ftlDir = new File(this.getClass().getClassLoader().getResource("").getPath()+"/ftl");
 		configuration.setDirectoryForTemplateLoading(ftlDir);
