@@ -25,7 +25,7 @@ public class GenerateUtil {
 		configuration.setDirectoryForTemplateLoading(ftlDir);
 		configuration.setDefaultEncoding("utf-8");
 		Template template = configuration.getTemplate(ftlName);
-		FileWriter fw = new FileWriter(new File(base + "/"+ generateFileName + ".java"));
+		FileWriter fw = new FileWriter(new File(base + "/"+ generateFileName));
 		template.process(dataModel, fw);
 		fw.close();
 		System.out.println("generate success！");

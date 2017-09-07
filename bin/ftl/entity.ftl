@@ -4,7 +4,9 @@ import java.math.BigInteger;
 import java.math.BigDecimal;
 import java.sql.Time;
 import java.sql.Timestamp;
-public class ${className?cap_first}{
+import java.util.Date;
+import java.io.Serializable;
+public class ${className?cap_first} implements  Serializable{
 	//属性
 	<#list columns as column>
 	private ${column.type} ${column.name};

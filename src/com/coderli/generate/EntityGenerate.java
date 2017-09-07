@@ -19,27 +19,33 @@ import com.coderli.utils.DButils;
 import com.coderli.utils.DataModelUtil;
 import com.coderli.utils.GenerateUtil;
 import com.coderli.utils.ParseProperties;
+import com.coderli.utils.StringUtil;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 @SuppressWarnings("all")
 public class EntityGenerate {
 	public void generateEntity() throws Exception{
+		//加载配置文件
 		ConfigInfo info = ParseProperties.parseGenerateProperties("generate.properties");
 		//数据库中的所有表数据
 		Map<String, Table> map = DButils.getDataBaseInfo(info);
-		//获取数据库中的表明
+		//获取数据库中的表名
 		List<String> tableNames = DataModelUtil.getTables(map);
+		//获取ftl文件的目录路径
 		String ftlDirPath=this.getClass().getClassLoader().getResource("").getPath()+"/ftl";
+		//使用的ftl文件名
 		String ftlName="entity.ftl";
+		//遍历数据库数据生成对应的java类
 		for (String tableName : tableNames) {
-			String generateFileName=tableName.substring(0, 1).toUpperCase()+tableName.substring(1);
 			Map dataModel = new HashMap<>();
-			//baseProjectName  className columns(name,type)
+			//表明转换为类名
+			String className=StringUtil.toClassName(tableName);
+			dataModel.put("className", className);
 			dataModel.put("baseProjectName", info.getTargetBasePackage());
-			dataModel.put("className", generateFileName);
 			List<Column> columns = DataModelUtil.getColumns(map,tableName);
 			dataModel.put("columns", columns);
+			String generateFileName=className+".java";
 			GenerateUtil.generate(info.getGeneratePath(),ftlDirPath, ftlName, dataModel, generateFileName);
 		}	
 	}

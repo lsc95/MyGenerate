@@ -35,4 +35,24 @@ public class DataModelUtil {
 		}
 		return data;
 	}
+	/**
+	 * 获取表中的主键（暂时只支持单个主键的操作）
+	 * @param map数据库中的表数据
+	 * @param tableName表明
+	 * @return 返回主键字段（暂时只支持单主键）
+	 * @throws ConvertException
+	 */
+	public static Column getPrimaryKey(Map<String, Table> map,String tableName) throws ConvertException{
+		Table table = map.get(tableName);
+		List<Column> keys = table.getPrimaryKeys();
+		if(keys==null||keys.size()<=0){
+			return null;
+		}
+		for (Column column : keys) {
+			String name = column.getName();
+			Column col = table.getColumns().get(name);
+			column.setType(col.getType());
+		}
+		return keys.get(0);
+	}
 }
