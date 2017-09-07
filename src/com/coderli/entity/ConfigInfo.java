@@ -60,4 +60,12 @@ public class ConfigInfo {
 		this.generatePath = generatePath;
 	}
 
+	@Override
+	public String toString() {
+		return "ConfigInfo [driver=" + driver + ", url=" + url + ", name="
+				+ name + ", password=" + password + ", generatePath="
+				+ generatePath + ", targetBasePackage=" + targetBasePackage
+				+ "]";
+	}
+
 }

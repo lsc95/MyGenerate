@@ -1,7 +1,7 @@
 package ${basePackage}.service;
 
 import java.util.*;
-import ${basePackage}.bean.${beanName}
+import ${basePackage}.bean.${beanName};
 
 public interface ${className}{
 	

@@ -13,9 +13,9 @@ public class ParseProperties {
 		ConfigInfo info = new ConfigInfo();
 		info.setDriver(properties.getProperty("jdbc.mysql.driver"));
 		info.setGeneratePath(properties.getProperty("generate.generatePath"));
-		info.setName("jdbc.mysql.username");
-		info.setPassword("jdbc.mysql.password");
-		info.setUrl("jdbc.mysql.url");
+		info.setName(properties.getProperty("jdbc.mysql.username"));
+		info.setPassword(properties.getProperty("jdbc.mysql.password"));
+		info.setUrl(properties.getProperty("jdbc.mysql.url"));
 		info.setTargetBasePackage(properties.getProperty("generate.projectName"));
 		return info;
 	}

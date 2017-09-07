@@ -34,6 +34,7 @@ public class ServiceImplGenerate {
 			dataModel.put("daoName", beanName+"DAO");
 			dataModel.put("serviceName", beanName+"Service");
 			dataModel.put("basePackage", info.getTargetBasePackage());
+			dataModel.put("serviceName", beanName+"Service");
 			Column primary = DataModelUtil.getPrimaryKey(map, tableName);
 			dataModel.put("primary", primary);
 			String generateFileName=beanName+"ServiceImpl.java";

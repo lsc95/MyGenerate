@@ -29,7 +29,7 @@ public class DButils {
 	
 	public static Connection getConn(ConfigInfo info) throws ClassNotFoundException, SQLException{
 		Class.forName(info.getDriver());
-		return (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8", "root", "");
+		return (Connection) DriverManager.getConnection(info.getUrl(),info.getName(),info.getPassword());
 	}
 
 	public static Map<String, Table> getTableInfo(DatabaseMetaData metaData)throws SQLException {

@@ -1,16 +1,16 @@
 package ${basePackage}.service.impl;
 import javax.annotation.Resource;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 import ${basePackage}.bean.${beanName};
+import ${basePackage}.service.${serviceName};
+import ${basePackage}.dao.${daoName};
 
-@Service("${className?lower_case}")
+@Service("${className?uncap_first}")
 @Transactional(rollbackFor=Exception.class)
-public class ${className} extends ${serviceName}{
-	@Resource(name="${daoName?lower_case}")
+public class ${className} implements ${serviceName}{
+	@Resource(name="${daoName?uncap_first}")
 	private ${daoName} ${daoName?lower_case} = null;
 	
 	public void create(${beanName} entity){

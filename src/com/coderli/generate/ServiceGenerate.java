@@ -3,6 +3,7 @@ package com.coderli.generate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import com.coderli.entity.Column;
 import com.coderli.entity.ConfigInfo;
 import com.coderli.entity.Table;
@@ -37,5 +38,8 @@ public class ServiceGenerate {
 			String generateFileName=beanName+"Service.java";
 			GenerateUtil.generate(info.getGeneratePath(),ftlDirPath, ftlName, dataModel, generateFileName);
 		}	
+	}
+	public static void main(String[] args) throws Exception {
+		new ServiceGenerate().generateEntity();
 	}
 }

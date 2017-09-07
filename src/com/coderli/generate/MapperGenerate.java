@@ -33,11 +33,12 @@ public class MapperGenerate {
 			//类名封装
 			dataModel.put("className", className);
 			dataModel.put("tableName", tableName);
+			dataModel.put("daoName", className+"DAO");
 			dataModel.put("basePackage", info.getTargetBasePackage());
-			List<Column> columns = DataModelUtil.getColumns(map, tableName);
-			dataModel.put("columns", columns);
 			Column primary = DataModelUtil.getPrimaryKey(map, tableName);
 			dataModel.put("primary", primary);
+			List<Column> columns = DataModelUtil.getColumns(map, tableName);
+			dataModel.put("columns", columns);
 			String generateFileName=tableName+".xml";
 			GenerateUtil.generate(info.getGeneratePath(), ftlDirPath, ftlName,
 					dataModel, generateFileName);

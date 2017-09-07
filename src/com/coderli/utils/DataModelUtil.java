@@ -51,7 +51,7 @@ public class DataModelUtil {
 		for (Column column : keys) {
 			String name = column.getName();
 			Column col = table.getColumns().get(name);
-			column.setType(col.getType());
+			column.setType(ConvertType.convertToJava(col.getType()));
 		}
 		return keys.get(0);
 	}
