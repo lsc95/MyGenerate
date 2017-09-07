@@ -6,18 +6,18 @@ public class ConfigInfo {
 	private String name;
 	private String password;
 	private String generatePath;
-	private String targetPackage;
+	private String targetBasePackage;
 
 	public ConfigInfo() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getTargetPackage() {
-		return targetPackage;
+	public String getTargetBasePackage() {
+		return targetBasePackage;
 	}
 
-	public void setTargetPackage(String targetPackage) {
-		this.targetPackage = targetPackage;
+	public void setTargetBasePackage(String targetBasePackage) {
+		this.targetBasePackage = targetBasePackage;
 	}
 
 	public String getDriver() {

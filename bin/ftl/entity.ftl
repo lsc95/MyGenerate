@@ -1,4 +1,4 @@
-package ${targetPackage}.bean;
+package ${baseProjectName}.bean;
 import java.sql.Date;
 import java.math.BigInteger;
 import java.math.BigDecimal;

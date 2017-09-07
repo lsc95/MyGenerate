@@ -16,45 +16,32 @@ import com.coderli.entity.ConfigInfo;
 import com.coderli.entity.Table;
 import com.coderli.utils.ConvertType;
 import com.coderli.utils.DButils;
+import com.coderli.utils.DataModelUtil;
+import com.coderli.utils.GenerateUtil;
 import com.coderli.utils.ParseProperties;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 @SuppressWarnings("all")
 public class EntityGenerate {
-	public File generateEntity() throws Exception{
-		//获取配置文件信息
+	public void generateEntity() throws Exception{
 		ConfigInfo info = ParseProperties.parseGenerateProperties("generate.properties");
-		String base = "D:/fileTest";	
+		//数据库中的所有表数据
 		Map<String, Table> map = DButils.getDataBaseInfo(info);
-		Iterator<Entry<String, Table>> iterator = map.entrySet().iterator();
-		//使用FreeMarker
-		Configuration configuration = new Configuration(Configuration.VERSION_2_3_26);
-		File ftlDir = new File(this.getClass().getClassLoader().getResource("").getPath()+"/ftl");
-		configuration.setDirectoryForTemplateLoading(ftlDir);
-		configuration.setDefaultEncoding("utf-8");
-		Template template = configuration.getTemplate("entity.ftl");
-		while (iterator.hasNext()) {
-			Map.Entry<String,Table> entry = iterator.next();
-			Table value = entry.getValue();
-			Map dataModel = new HashMap();
-			dataModel.put("targetPackage", info.getTargetPackage());
-			dataModel.put("className", value.getName());
-			List columns = new ArrayList<>();
-			Iterator<Entry<String, Column>> cols = value.getColumns().entrySet().iterator();
-			while (cols.hasNext()) {
-				Map.Entry<String,Column> col =cols.next();
-				Column column = col.getValue();
-				column.setType(ConvertType.convertToJava(column.getType()));
-				columns.add(column);
-			}
+		//获取数据库中的表明
+		List<String> tableNames = DataModelUtil.getTables(map);
+		String ftlDirPath=this.getClass().getClassLoader().getResource("").getPath()+"/ftl";
+		String ftlName="entity.ftl";
+		for (String tableName : tableNames) {
+			String generateFileName=tableName.substring(0, 1).toUpperCase()+tableName.substring(1);
+			Map dataModel = new HashMap<>();
+			//baseProjectName  className columns(name,type)
+			dataModel.put("baseProjectName", info.getTargetBasePackage());
+			dataModel.put("className", generateFileName);
+			List<Column> columns = DataModelUtil.getColumns(map,tableName);
 			dataModel.put("columns", columns);
-			FileWriter fw = new FileWriter(new File(base+"/"+value.getName()+".java"));
-			template.process(dataModel, fw);
-			fw.close();
-		}
-		System.out.println("generate success！");
-		return null;
+			GenerateUtil.generate(info.getGeneratePath(),ftlDirPath, ftlName, dataModel, generateFileName);
+		}	
 	}
 	public static void main(String[] args) throws Exception {
 		new EntityGenerate().generateEntity();

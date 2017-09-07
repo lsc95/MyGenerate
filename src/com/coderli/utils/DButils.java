@@ -1,6 +1,5 @@
 package com.coderli.utils;
 
-import java.io.IOException;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -13,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
 import com.coderli.entity.Column;
 import com.coderli.entity.ConfigInfo;
 import com.coderli.entity.Table;
