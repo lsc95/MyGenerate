@@ -29,6 +29,5 @@ public class GenerateUtil {
 		template.process(dataModel, fw);
 		fw.close();
 		System.out.println("generate success！");
-
 	}
 }

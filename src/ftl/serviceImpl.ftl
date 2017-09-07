@@ -1,53 +1,39 @@
-package ${basePackage}.${service.package};
-
+package ${basePackage}.service.impl;
 import javax.annotation.Resource;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
-import ${basePackage}.${repository.package}.${repository.class};
-import ${basePackage}.${model.package}.*;
+import ${basePackage}.bean.${beanName};
 
-@Service("${service.beanId}")
+@Service("${className?lower_case}")
 @Transactional(rollbackFor=Exception.class)
-public class ${service.class}{
-	@Resource(name="${repository.beanId}")
-	private ${repository.class} ${repository.beanId} = null;
+public class ${className} extends ${serviceName}{
+	@Resource(name="${daoName?lower_case}")
+	private ${daoName} ${daoName?lower_case} = null;
 	
-	public void test(){
-		System.out.println(${repository.beanId}.findByProperty(new HashMap()));
-		System.out.println("TEST SUCCESS!!!");
+	public void create(${beanName} entity){
+		${daoName?lower_case}.insert(entity);
 	}
 	
-	public void create(${model.class} entity){
-		${repository.beanId}.insert(entity);
+	public void update(${beanName} entity){
+		${daoName?lower_case}.update(entity);
 	}
 	
-	public void update(${model.class} entity){
-		${repository.beanId}.update(entity);
+	public void delete(${primary.type} ${primary.name}){
+		${daoName?lower_case}.delete(${primary.name});
 	}
 	
-	public void delete(${model.id.type} ${model.id.name}){
-		${repository.beanId}.delete(${model.id.name});
-	}
-	
-	public ${model.class} findById(${model.id.type} ${model.id.name}){
-		return ${repository.beanId}.findById(${model.id.name});
+	public ${beanName} findById(${primary.type} ${primary.name}){
+		return ${daoName?lower_case}.findById(${primary.name});
 	}
 	
 	public List<Map> findByProperty(Map params){
-		return ${repository.beanId}.findByProperty(params);
+		return ${daoName?lower_case}.findByProperty(params);
 	}
 	
 	public Long countByProperty(Map params){
-		return ${repository.beanId}.countByProperty(params);
+		return ${daoName?lower_case}.countByProperty(params);
 	}
-	
-	public static void main(String[] args) {
-		ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
-		${service.class} bean = (${service.class})ctx.getBean("${service.beanId}");
-		bean.test();
-	}
-	
 }
